@@ -1,9 +1,12 @@
 #include "pch.h"
 
+#include "Matchers.h"
+
 #include "../RayTracerLib/Math.h"
 
-using namespace RayTracer;
 
+using namespace RayTracer;
+const float kEpsilon = 1e-5f;
 TEST(TestMath, TestPoint) 
 {
 	const auto vec3d = Point(4.0f, -4.0f, 3.0f);
@@ -47,4 +50,34 @@ TEST(TestMath, TestVectorNegation)
 	const auto vec = Vector(1.0f, -2.0f, 3.0f);
 	const auto expected = Vector(-1.0f, 2.0f, -3.0f);
 	EXPECT_EQ(-vec, expected);
+}
+
+TEST(TestMath, TestMagnitude)
+{
+	const auto vec1 = Vector(0.0f, 0.0f, 1.0f);
+	EXPECT_NEAR(vec1.norm(), 1.0f, kEpsilon);
+
+	const auto vec2 = Vector(-1.0f, -2.0f, -3.0f);
+	EXPECT_NEAR(vec2.norm(), sqrt(14), kEpsilon);
+	EXPECT_NEAR(vec2.normalized().norm(), 1.0f, kEpsilon);
+}
+
+TEST(TestMath, TestDotProduct)
+{
+	const auto a = Vector(1.0f, 2.0f, 3.0f);
+	const auto b = Vector(2.0f, 3.0f, 4.0f);
+	EXPECT_NEAR(a.dot(b), 20.0f, kEpsilon);
+}
+
+TEST(TestMath, TestCrossProduct)
+{
+	const auto a = Vector(1.0f, 2.0f, 3.0f);
+	const auto b = Vector(2.0f, 3.0f, 4.0f);
+
+	const auto cross1 = a.cross3(b);
+	const auto cross2 = b.cross3(a);
+	EXPECT_THAT(cross1, IsSimilarToVector(-cross2, kEpsilon));
+
+	const auto expected = Vector(-1.0f, 2.0f, -1.0f);
+	EXPECT_THAT(cross1, IsSimilarToVector(expected, kEpsilon));
 }
