@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Math.h">
+    <ClInclude Include="include\RayTracer\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

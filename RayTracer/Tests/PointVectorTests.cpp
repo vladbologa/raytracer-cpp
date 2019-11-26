@@ -1,12 +1,11 @@
 #include "pch.h"
 
 #include "Matchers.h"
-
-#include "../RayTracerLib/Math.h"
-
+#include "RayTracer/Math.h"
 
 using namespace RayTracer;
 const float kEpsilon = 1e-5f;
+
 TEST(TestMath, TestPoint) 
 {
 	const auto vec3d = Point(4.0f, -4.0f, 3.0f);
