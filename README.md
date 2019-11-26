@@ -1,3 +1,3 @@
 # raytracer-cpp
 
-Ray tracer C++ experiment
+Ray tracer C++ toy project
