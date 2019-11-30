@@ -7,12 +7,30 @@ using namespace RayTracer;
 
 const float kEpsilon = 1e-5f;
 
+TEST(TestColor, TestDefaultConstructor)
+{
+    const Color color;
+    const auto expected = Color(0.0f, 0.0f, 0.0f);
+    EXPECT_THAT(color, IsSimilarToVector(expected, kEpsilon));
+}
+
 TEST(TestColor, TestConstructor)
 {
     const auto color = Color(0.5f, 0.4f, 0.3f);
     EXPECT_EQ(color.red(), 0.5f);
     EXPECT_EQ(color.green(), 0.4f);
     EXPECT_EQ(color.blue(), 0.3f);
+}
+
+TEST(TestColor, TestSetter)
+{
+    auto color = Color(1.0f, 0.2f, 0.4f);
+    color.red() = 0.9f;
+    color.green() = 0.3f;
+    color.blue() = 0.7f;
+
+    const auto expected = Color(0.9f, 0.3f, 0.7f);
+    EXPECT_THAT(color, IsSimilarToVector(expected, kEpsilon));
 }
 
 TEST(TestColor, TestAddition)
