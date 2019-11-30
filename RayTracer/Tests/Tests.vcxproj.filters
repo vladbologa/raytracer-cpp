@@ -9,6 +9,9 @@
     <ClCompile Include="MatcherTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="ColorTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matchers.h" />

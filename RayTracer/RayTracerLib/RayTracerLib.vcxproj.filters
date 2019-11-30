@@ -18,5 +18,8 @@
     <ClInclude Include="include\RayTracer\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\RayTracer\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
