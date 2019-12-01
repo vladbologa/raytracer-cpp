@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\RayTracer\Canvas.h" />
     <ClInclude Include="include\RayTracer\Color.h" />
     <ClInclude Include="include\RayTracer\Math.h" />
   </ItemGroup>
