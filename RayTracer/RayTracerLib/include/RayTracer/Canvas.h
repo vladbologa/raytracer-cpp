@@ -4,6 +4,8 @@
 
 #include <cassert>
 #include <vector>
+#include <string>
+#include <sstream>
 
 namespace RayTracer {
 
@@ -41,6 +43,8 @@ public:
     {
         return m_height;
     }
+
+    std::stringstream exportToPpm() const;
 
 private:
     size_t m_width;
