@@ -4,16 +4,17 @@
 
 namespace RayTracer {
 
-template<typename TEigenArray>
-class ColorMixin : public TEigenArray
+// Thin wrapper over Eigen::Array3f that adds convenience
+// red(), green() and blue() functions
+class Color : public Eigen::Array3f
 {
 public:
-    ColorMixin()
-        : TEigenArray(0.0f, 0.0f, 0.0f)
+    Color()
+        : Eigen::Array3f(0.0f, 0.0f, 0.0f)
     {}
-    
-    ColorMixin(float red, float green, float blue)
-        : TEigenArray(red, green, blue)
+
+    Color(float red, float green, float blue)
+        : Eigen::Array3f(red, green, blue)
     {}
 
     float red() const {
@@ -40,7 +41,5 @@ public:
         return (*this)[2];
     }
 };
-
-using Color = ColorMixin<Eigen::Array3f>;
 
 }
