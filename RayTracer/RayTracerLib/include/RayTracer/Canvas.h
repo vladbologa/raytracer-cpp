@@ -31,7 +31,7 @@ public:
     const Color& pixelAt(size_t x, size_t y) const noexcept
     {
         assert(x < m_width); assert(y < m_height);
-        return m_canvas[x * m_height + y];
+        return m_canvas[x + y * m_width];
     }
 
     size_t width() const noexcept
