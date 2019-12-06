@@ -20,4 +20,3 @@ gtest_discover_tests(TestRayTracerCpp
                 PROPERTIES FOLDER "Tests")
 
 target_compile_features(TestRayTracerCpp PUBLIC cxx_std_17)
-

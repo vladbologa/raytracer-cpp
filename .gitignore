@@ -1,3 +1,7 @@
+RayTracer/out
+RayTracer/CMakeSettings.json
+
+# Output file format of the ray tracer
 *.ppm
 
 # Prerequisites
