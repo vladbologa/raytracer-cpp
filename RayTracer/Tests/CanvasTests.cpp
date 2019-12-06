@@ -105,14 +105,14 @@ TEST(TestCanvasDeathTest, TestOutOfBounds)
     const size_t height = 40;
     {
         Canvas canvas(width, height);
-        EXPECT_EXIT(canvas.pixelAt(width, 0) = Color(), ::testing::ExitedWithCode(3), "Assertion failed");
-        EXPECT_EXIT(canvas.pixelAt(0, height) = Color(), ::testing::ExitedWithCode(3), "Assertion failed");
+        EXPECT_DEATH(canvas.pixelAt(width, 0) = Color(), "Assertion");
+        EXPECT_DEATH(canvas.pixelAt(0, height) = Color(), "Assertion");
     }
 
     {
         const Canvas canvas(width, height);
-        EXPECT_EXIT(canvas.pixelAt(width, 0), ::testing::ExitedWithCode(3), "Assertion failed");
-        EXPECT_EXIT(canvas.pixelAt(0, height), ::testing::ExitedWithCode(3), "Assertion failed");
+        EXPECT_DEATH(canvas.pixelAt(width, 0), "Assertion");
+        EXPECT_DEATH(canvas.pixelAt(0, height), "Assertion");
     }
 }
 #endif // NDEBUG
