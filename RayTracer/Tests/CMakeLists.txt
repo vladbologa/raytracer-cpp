@@ -7,7 +7,7 @@ set(Tests_SRCS
 	CanvasTests.cpp
 	ColorTests.cpp
 	MatcherTests.cpp
-	PointVectorTests.cpp)
+	LinearAlgebraTests.cpp)
 
 add_executable(TestRayTracerCpp ${Tests_HEADERS} ${Tests_SRCS})
 
