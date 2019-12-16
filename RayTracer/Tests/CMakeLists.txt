@@ -1,13 +1,14 @@
 set(Tests_HEADERS
-        pch.h
+    pch.h
 	Matchers.h)
 set(Tests_SRCS
-        main.cpp
+    main.cpp
 	pch.cpp
 	CanvasTests.cpp
 	ColorTests.cpp
 	MatcherTests.cpp
-	LinearAlgebraTests.cpp)
+	LinearAlgebraTests.cpp
+	TransformTests.cpp)
 
 add_executable(TestRayTracerCpp ${Tests_HEADERS} ${Tests_SRCS})
 

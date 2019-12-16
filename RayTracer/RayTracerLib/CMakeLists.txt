@@ -1,9 +1,11 @@
 set(RayTracerCpp_HEADERS 
 	include/RayTracer/Canvas.h
 	include/RayTracer/Color.h
-	include/RayTracer/Math.h)
+	include/RayTracer/Math.h
+	include/RayTracer/Transform.h)
 set(RayTracerCpp_SRCS
-	src/Canvas.cpp)
+	src/Canvas.cpp
+	src/Transform.cpp)
 
 add_library(RayTracerLib ${RayTracerCpp_SRCS} ${RayTracerCpp_HEADERS})
 
