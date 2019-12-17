@@ -29,6 +29,9 @@ Matrix4f Scaling(const Vector4f& v);
 // Builds a 4x4 rotation matrix, rotating along the given axis
 Matrix4f Rotation(Axes axis, float angle);
 
+// Builds a 4x4 shearing matrix
+Matrix4f Shearing(float xy, float xz, float yx, float yz, float zx, float zy);
+
 } // Transform
 
 } // RayTracer

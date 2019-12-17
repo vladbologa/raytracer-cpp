@@ -53,6 +53,19 @@ Matrix4f Rotation(Axes axis, float angle)
     return transform.matrix();
 }
 
+Matrix4f Shearing(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+    Matrix4f transformationMatrix = Matrix4f::Identity();
+    transformationMatrix(0, 1) = xy;
+    transformationMatrix(0, 2) = xz;
+    transformationMatrix(1, 0) = yx;
+    transformationMatrix(1, 2) = yz;
+    transformationMatrix(2, 0) = zx;
+    transformationMatrix(2, 1) = zy;
+
+    return transformationMatrix;
+}
+
 } // Transform
 
 } // RayTracer

@@ -184,3 +184,44 @@ TEST(TestTransform, TestRotateZ)
         EXPECT_THAT(transform45 * p, IsSimilarToVector(expected45, kEpsilon));
     }
 }
+
+TEST(TestTransform, TestShearing)
+{
+    const auto p = MakePoint(2.0f, 3.0f, 4.0f);
+
+    {
+        const auto transform = Transform::Shearing(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        const auto expected = MakePoint(5.0f, 3.0f, 4.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+
+    {
+        const auto transform = Transform::Shearing(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        const auto expected = MakePoint(6.0f, 3.0f, 4.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+
+    {
+        const auto transform = Transform::Shearing(0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+        const auto expected = MakePoint(2.0f, 5.0f, 4.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+
+    {
+        const auto transform = Transform::Shearing(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f);
+        const auto expected = MakePoint(2.0f, 7.0f, 4.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+
+    {
+        const auto transform = Transform::Shearing(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        const auto expected = MakePoint(2.0f, 3.0f, 6.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+
+    {
+        const auto transform = Transform::Shearing(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+        const auto expected = MakePoint(2.0f, 3.0f, 7.0f);
+        EXPECT_THAT(transform * p, IsSimilarToVector(expected, kEpsilon));
+    }
+}
