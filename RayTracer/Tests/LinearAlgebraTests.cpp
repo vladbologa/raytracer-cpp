@@ -83,19 +83,19 @@ TEST(TestMath, TestCrossProduct)
 
 TEST(TestMath, TestMatrixMultiplication)
 {
-    Eigen::Matrix4f m1;
+    Matrix4f m1;
     m1 << 1.0f, 2.0f, 3.0f, 4.0f,
         5.0f, 6.0f, 7.0f, 8.0f,
         9.0f, 8.0f, 7.0f, 6.0f,
         5.0f, 4.0f, 3.0f, 2.0f;
 
-    Eigen::Matrix4f m2;
+    Matrix4f m2;
     m2 << -2.0f, 1.0f, 2.0f, 3.0f,
         3.0f, 2.0f, 1.0f, -1.0f,
         4.0f, 3.0f, 6.0f, 5.0f,
         1.0f, 2.0f, 7.0f, 8.0f;
 
-    Eigen::Matrix4f expected;
+    Matrix4f expected;
     expected << 20.0f, 22.0f, 50.0f, 48.0f,
         44.0f, 54.0f, 114.0f, 108.0f,
         40.0f, 58.0f, 110.0f, 102.0f,
@@ -107,7 +107,7 @@ TEST(TestMath, TestMatrixMultiplication)
 
 TEST(TestMath, TestVectorMatrixMultiplication)
 {
-    Eigen::Matrix4f mat;
+    Matrix4f mat;
     mat << 1.0f, 2.0f, 3.0f, 4.0f,
         2.0f, 4.0f, 4.0f, 2.0f,
         8.0f, 6.0f, 4.0f, 1.0f,
@@ -121,13 +121,13 @@ TEST(TestMath, TestVectorMatrixMultiplication)
 
 TEST(TestMath, TestTranspose)
 {
-    Eigen::Matrix4f mat;
+    Matrix4f mat;
     mat << 1.0f, 2.0f, 3.0f, 4.0f,
         2.0f, 4.0f, 4.0f, 2.0f,
         8.0f, 6.0f, 4.0f, 1.0f,
         0.0f, 0.0f, 0.0f, 1.0f;
 
-    Eigen::Matrix4f transpose;
+    Matrix4f transpose;
     transpose << 1.0f, 2.0f, 8.0f, 0.0f,
         2.0f, 4.0f, 6.0f, 0.0f,
         3.0f, 4.0f, 4.0f, 0.0f,
@@ -141,26 +141,26 @@ TEST(TestMath, TestTranspose)
 TEST(TestMath, TestInverse)
 {
     {
-        Eigen::Matrix4f mat;
+        Matrix4f mat;
         mat << -4.0f, 2.0f, -2.0f, -3.0f,
             9.0f, 6.0f, 2.0f, 6.0f,
             0.0f, -5.0f, 1.0f, -5.0f,
             0.0f, 0.0f, 0.0f, 0.0f;
 
-        Eigen::Matrix4f result;
+        Matrix4f result;
         bool invertible;
         mat.computeInverseWithCheck(result, invertible, kEpsilon);
         EXPECT_FALSE(invertible);
     }
 
     {
-        Eigen::Matrix4f mat;
+        Matrix4f mat;
         mat << 6.0f, 4.0f, 4.0f, 4.0f,
             5.0f, 5.0f, 7.0f, 6.0f,
             4.0f, -9.0f, 3.0f, -7.0f,
             9.0f, 1.0f, 7.0f, -6.0f;
 
-        Eigen::Matrix4f result;
+        Matrix4f result;
         bool invertible;
         float determinant;
         mat.computeInverseAndDetWithCheck(result, determinant, invertible, kEpsilon);
@@ -169,13 +169,13 @@ TEST(TestMath, TestInverse)
     }
 
     {
-        Eigen::Matrix4f a;
+        Matrix4f a;
         a << 3.0f, -9.0f, 7.0f, 3.0f,
             3.0f, -8.0f, 2.0f, -9.0f,
             -4.0f, 4.0f, 4.0f, 1.0f,
             -6.0f, 5.0f, -1.0f, 1.0f;
 
-        Eigen::Matrix4f b;
+        Matrix4f b;
         b << 8.0f, 2.0f, 2.0f, 2.0f,
             3.0f, -1.0f, 7.0f, 0.0f,
             7.0f, 0.0f, 5.0f, 4.0f,

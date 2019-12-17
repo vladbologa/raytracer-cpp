@@ -1,6 +1,8 @@
 RayTracer/out
 RayTracer/CMakeSettings.json
 
+*.bak
+
 # Output file format of the ray tracer
 *.ppm
 

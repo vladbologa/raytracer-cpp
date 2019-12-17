@@ -7,14 +7,14 @@ using namespace RayTracer;
 
 struct Projectile
 {
-    Eigen::Vector4f position;
-    Eigen::Vector4f velocity;
+    Vector4f position;
+    Vector4f velocity;
 };
 
 struct Environment
 {
-    Eigen::Vector4f gravity;
-    Eigen::Vector4f wind;
+    Vector4f gravity;
+    Vector4f wind;
 };
 
 void tick(Projectile& proj, const Environment& env)
