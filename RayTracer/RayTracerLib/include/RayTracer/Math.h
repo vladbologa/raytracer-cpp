@@ -17,12 +17,12 @@ using Matrix4f = Eigen::Matrix4f;
 // t * v will do the right thing regardless of v being a vector or a point.
 
 // returns a 3D vector (w coeff is 0)
-inline Vector4f Vector(float x, float y, float z) {
+inline Vector4f MakeVector(float x, float y, float z) {
     return Vector4f(x, y, z, 0.0f);
 }
 
 // returns a 3D point in homogenous coordinates (w coeff is 1)
-inline Vector4f Point(float x, float y, float z) {
+inline Vector4f MakePoint(float x, float y, float z) {
     return Vector4f(x, y, z, 1.0f);
 }
 

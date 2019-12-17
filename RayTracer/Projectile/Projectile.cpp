@@ -42,9 +42,9 @@ void writeCanvasToFile(const Canvas& canvas, const std::string& fileName)
 
 int main()
 {
-    const auto velocity = Vector(1.0f, 1.8f, 0.0f).normalized();
-    Projectile proj{ Point(0.0f, 1.0f, 0.0f), 11.25 * velocity };
-    const Environment env{ Vector(0.0f, -0.1f, 0.0f), Vector(-0.01f, 0.0f, 0.0f) };
+    const auto velocity = MakeVector(1.0f, 1.8f, 0.0f).normalized();
+    Projectile proj{ MakePoint(0.0f, 1.0f, 0.0f), 11.25 * velocity };
+    const Environment env{ MakeVector(0.0f, -0.1f, 0.0f), MakeVector(-0.01f, 0.0f, 0.0f) };
 
     Canvas canvas(900, 550);
     while (proj.position.y() > 0.0f) {
