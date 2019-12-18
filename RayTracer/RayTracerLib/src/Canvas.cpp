@@ -1,6 +1,7 @@
 #include "RayTracer/Canvas.h"
 
 #include <algorithm>
+#include <fstream>
 
 namespace RayTracer {
 
@@ -39,6 +40,13 @@ std::stringstream Canvas::exportToPpm() const
 
     ppmStream << std::endl;
     return ppmStream;
+}
+
+void WriteCanvasToFile(const Canvas& canvas, const std::string& fileName)
+{
+    auto ppmStream = canvas.exportToPpm();
+    std::ofstream fout(fileName);
+    fout << ppmStream.rdbuf();
 }
 
 }

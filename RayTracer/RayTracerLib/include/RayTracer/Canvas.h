@@ -52,4 +52,6 @@ private:
     std::vector<Color> m_canvas;
 };
 
+void WriteCanvasToFile(const Canvas& canvas, const std::string& fileName);
+
 }

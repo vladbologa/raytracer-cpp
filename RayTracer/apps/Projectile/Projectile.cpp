@@ -1,8 +1,6 @@
 #include <RayTracer/Canvas.h>
 #include <RayTracer/Math.h>
 
-#include <fstream>
-
 using namespace RayTracer;
 
 struct Projectile
@@ -17,13 +15,13 @@ struct Environment
     Vector4f wind;
 };
 
-void tick(Projectile& proj, const Environment& env)
+void Tick(Projectile& proj, const Environment& env)
 {
     proj.position += proj.velocity;
     proj.velocity += env.gravity + env.wind;
 }
 
-void drawProjectile(const Projectile& proj, Canvas& canvas)
+void DrawProjectile(const Projectile& proj, Canvas& canvas)
 {
     const int pixelX = static_cast<int>(std::round(proj.position.x()));
     const int pixelY = static_cast<int>(canvas.height()) - static_cast<int>(std::round(proj.position.y()));
@@ -31,13 +29,6 @@ void drawProjectile(const Projectile& proj, Canvas& canvas)
     if (pixelX >= 0 && pixelX < canvas.width() && pixelY >= 0 && pixelY < canvas.height()) {
         canvas.pixelAt(pixelX, pixelY) = Color(1.0f, 0.0f, 0.0f);
     }
-}
-
-void writeCanvasToFile(const Canvas& canvas, const std::string& fileName)
-{
-    auto ppmStream = canvas.exportToPpm();
-    std::ofstream fout("out.ppm");
-    fout << ppmStream.rdbuf();
 }
 
 int main()
@@ -48,9 +39,9 @@ int main()
 
     Canvas canvas(900, 550);
     while (proj.position.y() > 0.0f) {
-        tick(proj, env);
-        drawProjectile(proj, canvas);
+        Tick(proj, env);
+        DrawProjectile(proj, canvas);
     }
 
-    writeCanvasToFile(canvas, "out.ppm");
+    WriteCanvasToFile(canvas, "projectile.ppm");
 }
