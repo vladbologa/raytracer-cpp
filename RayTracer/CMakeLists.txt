@@ -19,7 +19,7 @@ include(AddGoogleTest)
 find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
 add_subdirectory(RayTracerLib)
-add_subdirectory(Projectile)
+add_subdirectory(apps)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
     add_subdirectory(Tests)
