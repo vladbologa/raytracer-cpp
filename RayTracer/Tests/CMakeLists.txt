@@ -8,6 +8,7 @@ set(Tests_SRCS
 	ColorTests.cpp
 	MatcherTests.cpp
 	LinearAlgebraTests.cpp
+	RayTests.cpp
 	TransformTests.cpp)
 
 add_executable(TestRayTracerCpp ${Tests_HEADERS} ${Tests_SRCS})

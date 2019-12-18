@@ -2,6 +2,7 @@ set(RayTracerCpp_HEADERS
 	include/RayTracer/Canvas.h
 	include/RayTracer/Color.h
 	include/RayTracer/Math.h
+	include/RayTracer/Ray.h
 	include/RayTracer/Transform.h)
 set(RayTracerCpp_SRCS
 	src/Canvas.cpp
