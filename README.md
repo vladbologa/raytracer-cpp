@@ -2,6 +2,24 @@
 
 Building a ray tracer in C++, following "The Ray Tracer Challenge" by Jamis Buck
 
-Currently the only dependencies are Eigen v3.3+ (http://eigen.tuxfamily.org) and CMake 3.15+.
+## Dependencies
 
-Tested with Visual Studio 16.4 on Windows 10, and gcc 9.2 on Linux.
+- CMake 3.20+
+- A C++17 compiler (GCC, Clang, or MSVC)
+- Eigen 5.0 and GoogleTest 1.17 are fetched automatically at configure time
+
+## Build
+
+```bash
+cmake -S RayTracer -B RayTracer/build -DCMAKE_BUILD_TYPE=Debug
+cmake --build RayTracer/build
+ctest --test-dir RayTracer/build --output-on-failure
+```
+
+On Windows with MinGW (no Visual Studio required):
+
+```powershell
+cmake -S RayTracer -B RayTracer/build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug
+cmake --build RayTracer/build
+ctest --test-dir RayTracer/build --output-on-failure
+```
