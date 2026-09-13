@@ -13,7 +13,7 @@ Run these commands from the repository root.
 ## Build with GCC or Clang
 
 ```bash
-cmake -S RayTracer -B build -DCMAKE_BUILD_TYPE=Debug
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build --parallel
 ctest --test-dir build --output-on-failure
 ```
@@ -21,7 +21,7 @@ ctest --test-dir build --output-on-failure
 ## Build with Visual Studio
 
 ```powershell
-cmake -S RayTracer -B build-msvc -G "Visual Studio 17 2022" -A x64
+cmake -S . -B build-msvc -G "Visual Studio 17 2022" -A x64
 cmake --build build-msvc --config Debug --parallel
 ctest --test-dir build-msvc -C Debug --output-on-failure
 ```
