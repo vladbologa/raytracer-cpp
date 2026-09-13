@@ -15,6 +15,7 @@ class Canvas {
     Canvas(size_t width, size_t height)
         : width_(width), height_(height), canvas_(width_ * height_) {}
 
+    // Disallow expensive implicit copies (use clone() instead)
     Canvas(const Canvas &other) = delete;
     Canvas &operator=(const Canvas &other) = delete;
 

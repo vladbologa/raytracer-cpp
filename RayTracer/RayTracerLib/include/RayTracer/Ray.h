@@ -18,7 +18,9 @@ class Ray {
     [[nodiscard]] const Vector4f &direction() const noexcept { return direction_; }
 
     // Calculates the point at a given @c distance along the ray
-    [[nodiscard]] Vector4f position(float distance) const { return origin_ + direction_ * distance; }
+    [[nodiscard]] Vector4f position(float distance) const {
+        return origin_ + direction_ * distance;
+    }
 
   private:
     Vector4f origin_;
