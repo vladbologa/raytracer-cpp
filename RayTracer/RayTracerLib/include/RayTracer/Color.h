@@ -12,17 +12,17 @@ class Color : public Eigen::Array3f {
 
     Color(float red, float green, float blue) : Eigen::Array3f(red, green, blue) {}
 
-    float red() const { return (*this)[0]; }
+    [[nodiscard]] float red() const noexcept { return (*this)[0]; }
 
-    float &red() { return (*this)[0]; }
+    [[nodiscard]] float &red() noexcept { return (*this)[0]; }
 
-    float green() const { return (*this)[1]; }
+    [[nodiscard]] float green() const noexcept { return (*this)[1]; }
 
-    float &green() { return (*this)[1]; }
+    [[nodiscard]] float &green() noexcept { return (*this)[1]; }
 
-    float blue() const { return (*this)[2]; }
+    [[nodiscard]] float blue() const noexcept { return (*this)[2]; }
 
-    float &blue() { return (*this)[2]; }
+    [[nodiscard]] float &blue() noexcept { return (*this)[2]; }
 };
 
 } // namespace RayTracer

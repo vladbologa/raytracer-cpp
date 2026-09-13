@@ -4,6 +4,8 @@
 #include "RayTracer/Math.h"
 #include "RayTracer/Transform.h"
 
+#include <numbers>
+
 using namespace RayTracer;
 const float kEpsilon = 1e-5f;
 
@@ -99,15 +101,17 @@ TEST(TestTransform, TestRotateX) {
     {
         const auto p = MakePoint(0.0f, 1.0f, 0.0f);
 
-        const auto transform90 = Transform::Rotation(Axes::X, EIGEN_PI / 2.0f);
+        const auto transform90 = Transform::Rotation(Axes::X, std::numbers::pi_v<float> / 2.0f);
         const auto expected90 = MakePoint(0.0f, 0.0f, 1.0f);
         EXPECT_THAT(transform90 * p, IsSimilarToVector(expected90, kEpsilon));
 
-        const auto transform45 = Transform::Rotation(Axes::X, EIGEN_PI / 4.0f);
-        const auto expected45 = MakePoint(0.0f, sqrt(2.0f) / 2.0f, sqrt(2.0f) / 2.0f);
+        const auto transform45 = Transform::Rotation(Axes::X, std::numbers::pi_v<float> / 4.0f);
+        const auto expected45 = MakePoint(0.0f, std::numbers::sqrt2_v<float> / 2.0f,
+                                          std::numbers::sqrt2_v<float> / 2.0f);
         EXPECT_THAT(transform45 * p, IsSimilarToVector(expected45, kEpsilon));
 
-        const auto expectedInv45 = MakePoint(0.0f, sqrt(2.0f) / 2.0f, -sqrt(2.0f) / 2.0f);
+        const auto expectedInv45 = MakePoint(0.0f, std::numbers::sqrt2_v<float> / 2.0f,
+                                             -std::numbers::sqrt2_v<float> / 2.0f);
         EXPECT_THAT(transform45.inverse() * p, IsSimilarToVector(expectedInv45, kEpsilon));
     }
 }
@@ -116,12 +120,13 @@ TEST(TestTransform, TestRotateY) {
     {
         const auto p = MakePoint(0.0f, 0.0f, 1.0f);
 
-        const auto transform90 = Transform::Rotation(Axes::Y, EIGEN_PI / 2.0f);
+        const auto transform90 = Transform::Rotation(Axes::Y, std::numbers::pi_v<float> / 2.0f);
         const auto expected90 = MakePoint(1.0f, 0.0f, 0.0f);
         EXPECT_THAT(transform90 * p, IsSimilarToVector(expected90, kEpsilon));
 
-        const auto transform45 = Transform::Rotation(Axes::Y, EIGEN_PI / 4.0f);
-        const auto expected45 = MakePoint(sqrt(2.0f) / 2.0f, 0.0f, sqrt(2.0f) / 2.0f);
+        const auto transform45 = Transform::Rotation(Axes::Y, std::numbers::pi_v<float> / 4.0f);
+        const auto expected45 = MakePoint(std::numbers::sqrt2_v<float> / 2.0f, 0.0f,
+                                          std::numbers::sqrt2_v<float> / 2.0f);
         EXPECT_THAT(transform45 * p, IsSimilarToVector(expected45, kEpsilon));
     }
 }
@@ -130,12 +135,13 @@ TEST(TestTransform, TestRotateZ) {
     {
         const auto p = MakePoint(0.0f, 1.0f, 0.0f);
 
-        const auto transform90 = Transform::Rotation(Axes::Z, EIGEN_PI / 2.0f);
+        const auto transform90 = Transform::Rotation(Axes::Z, std::numbers::pi_v<float> / 2.0f);
         const auto expected90 = MakePoint(-1.0f, 0.0f, 0.0f);
         EXPECT_THAT(transform90 * p, IsSimilarToVector(expected90, kEpsilon));
 
-        const auto transform45 = Transform::Rotation(Axes::Z, EIGEN_PI / 4.0f);
-        const auto expected45 = MakePoint(-sqrt(2.0f) / 2.0f, sqrt(2.0f) / 2.0f, 0.0f);
+        const auto transform45 = Transform::Rotation(Axes::Z, std::numbers::pi_v<float> / 4.0f);
+        const auto expected45 = MakePoint(-std::numbers::sqrt2_v<float> / 2.0f,
+                                          std::numbers::sqrt2_v<float> / 2.0f, 0.0f);
         EXPECT_THAT(transform45 * p, IsSimilarToVector(expected45, kEpsilon));
     }
 }
@@ -184,7 +190,7 @@ TEST(TestTransform, TestChainedTransforms) {
     const auto p = MakePoint(1.0f, 0.0f, 1.0f);
 
     auto transformation = Transformation::IdentityTransformation()
-                              .rotate(Axes::X, EIGEN_PI / 2.0F)
+                              .rotate(Axes::X, std::numbers::pi_v<float> / 2.0f)
                               .scale(5.0f, 5.0f, 5.0f)
                               .translate(MakeVector(10.0f, 5.0f, 7.0f));
 

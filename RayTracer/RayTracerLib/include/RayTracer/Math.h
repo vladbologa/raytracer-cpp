@@ -18,13 +18,13 @@ using Matrix4f = Eigen::Matrix4f;
 // vector or a point.
 
 // returns a 3D vector (w coeff is 0)
-inline Vector4f MakeVector(float x, float y, float z) {
-    return Vector4f(x, y, z, 0.0f);
+[[nodiscard]] inline Vector4f MakeVector(float x, float y, float z) {
+    return {x, y, z, 0.0f};
 }
 
 // returns a 3D point in homogenous coordinates (w coeff is 1)
-inline Vector4f MakePoint(float x, float y, float z) {
-    return Vector4f(x, y, z, 1.0f);
+[[nodiscard]] inline Vector4f MakePoint(float x, float y, float z) {
+    return {x, y, z, 1.0f};
 }
 
 } // namespace RayTracer

@@ -26,13 +26,15 @@ class Canvas {
     ~Canvas() = default;
 
     Color &pixelAt(size_t x, size_t y) noexcept {
-        return const_cast<Color &>(std::as_const(*this).pixelAt(x, y));
+        assert(x < width_);
+        assert(y < height_);
+        return canvas_[x + (y * width_)];
     }
 
     [[nodiscard]] const Color &pixelAt(size_t x, size_t y) const noexcept {
         assert(x < width_);
         assert(y < height_);
-        return canvas_[x + y * width_];
+        return canvas_[x + (y * width_)];
     }
 
     [[nodiscard]] size_t width() const noexcept { return width_; }

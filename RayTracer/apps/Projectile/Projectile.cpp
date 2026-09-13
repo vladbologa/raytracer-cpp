@@ -23,15 +23,17 @@ void DrawProjectile(const Projectile &proj, Canvas &canvas) {
     const int pixelY =
         static_cast<int>(canvas.height()) - static_cast<int>(std::round(proj.position.y()));
 
-    if (pixelX >= 0 && pixelX < canvas.width() && pixelY >= 0 && pixelY < canvas.height()) {
+    if (pixelX >= 0 && static_cast<size_t>(pixelX) < canvas.width() && pixelY >= 0 &&
+        static_cast<size_t>(pixelY) < canvas.height()) {
         canvas.pixelAt(pixelX, pixelY) = Color(1.0f, 0.0f, 0.0f);
     }
 }
 
 int main() {
     const auto velocity = MakeVector(1.0f, 1.8f, 0.0f).normalized();
-    Projectile proj{MakePoint(0.0f, 1.0f, 0.0f), 11.25 * velocity};
-    const Environment env{MakeVector(0.0f, -0.1f, 0.0f), MakeVector(-0.01f, 0.0f, 0.0f)};
+    Projectile proj{.position = MakePoint(0.0f, 1.0f, 0.0f), .velocity = 11.25f * velocity};
+    const Environment env{.gravity = MakeVector(0.0f, -0.1f, 0.0f),
+                          .wind = MakeVector(-0.01f, 0.0f, 0.0f)};
 
     Canvas canvas(900, 550);
     while (proj.position.y() > 0.0f) {

@@ -2,6 +2,8 @@
 
 #include "pch.h"
 
+#include <cmath>
+
 // Matcher for two Eigen vectors (i.e. 1D matrices)
 MATCHER_P2(IsSimilarToVector, expected, epsilon, "") {
     if (arg.size() != expected.size()) {
@@ -10,8 +12,8 @@ MATCHER_P2(IsSimilarToVector, expected, epsilon, "") {
     }
 
     // TODO: Eigen 3.4 will support STL iterators
-    for (Eigen::Index i = 0; i < arg.size(); i++) {
-        if (fabs(arg[i] - expected[i]) > epsilon) {
+    for (Eigen::Index i = 0; i < arg.size(); ++i) {
+        if (std::abs(arg[i] - expected[i]) > epsilon) {
             *result_listener << "elements at index " << i << " are not similar: " << arg[i] << " "
                              << expected[i];
             return false;
@@ -29,11 +31,11 @@ MATCHER_P2(IsSimilarToMatrix, expected, epsilon, "") {
     }
 
     // TODO: Eigen 3.4 will support STL iterators
-    for (Eigen::Index i = 0; i < arg.rows(); i++) {
+    for (Eigen::Index i = 0; i < arg.rows(); ++i) {
         const auto rowArg = arg.row(i);
         const auto rowExpected = expected.row(i);
-        for (Eigen::Index j = 0; j < rowArg.size(); j++) {
-            if (fabs(rowArg[j] - rowExpected[j]) > epsilon) {
+        for (Eigen::Index j = 0; j < rowArg.size(); ++j) {
+            if (std::abs(rowArg[j] - rowExpected[j]) > epsilon) {
                 *result_listener << "elements at (row " << i << ", column " << j
                                  << ") are not similar: " << rowArg[j] << " " << rowExpected[j];
                 return false;
