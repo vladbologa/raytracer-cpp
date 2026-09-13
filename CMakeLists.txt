@@ -18,10 +18,12 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddEigen)
 include(AddGoogleTest)
 
+# Linked only by our own targets, so warnings never apply to fetched dependencies.
+add_library(project_warnings INTERFACE)
 if(MSVC)
-	add_compile_options(/W4 /WX)
+	target_compile_options(project_warnings INTERFACE /W4 /WX)
 else()
-	add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+	target_compile_options(project_warnings INTERFACE -Wall -Wextra -Wpedantic -Werror)
 endif()
 
 option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis during build" OFF)
@@ -36,9 +38,9 @@ if(ENABLE_CLANG_TIDY)
 	endif()
 endif()
 
-add_subdirectory(RayTracerLib)
+add_subdirectory(lib)
 add_subdirectory(apps)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
-    add_subdirectory(Tests)
+    add_subdirectory(tests)
 endif()

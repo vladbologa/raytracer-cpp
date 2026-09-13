@@ -12,7 +12,7 @@ add_library(RayTracerLib ${RayTracerCpp_SRCS} ${RayTracerCpp_HEADERS})
 
 target_include_directories(RayTracerLib PUBLIC include)
 
-target_link_libraries(RayTracerLib PUBLIC Eigen3::Eigen)
+target_link_libraries(RayTracerLib PUBLIC Eigen3::Eigen PRIVATE project_warnings)
 
 target_compile_features(RayTracerLib PUBLIC cxx_std_20)
 
