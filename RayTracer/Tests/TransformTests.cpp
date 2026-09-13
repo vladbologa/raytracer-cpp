@@ -1,14 +1,13 @@
 #include "pch.h"
 
 #include "Matchers.h"
-#include "RayTracer/Transform.h"
 #include "RayTracer/Math.h"
+#include "RayTracer/Transform.h"
 
 using namespace RayTracer;
 const float kEpsilon = 1e-5f;
 
-TEST(TestTransform, TestTranslationScalars)
-{
+TEST(TestTransform, TestTranslationScalars) {
     {
         const auto transform = Transform::Translation(5.0f, -3.0f, 2.0f);
         const auto p = MakePoint(-3.0f, 4.0f, 5.0f);
@@ -33,8 +32,7 @@ TEST(TestTransform, TestTranslationScalars)
     }
 }
 
-TEST(TestTransform, TestTranslationVector)
-{
+TEST(TestTransform, TestTranslationVector) {
     {
         const auto transform = Transform::Translation(MakeVector(5.0f, -3.0f, 2.0f));
         const auto p = MakePoint(-3.0f, 4.0f, 5.0f);
@@ -59,8 +57,7 @@ TEST(TestTransform, TestTranslationVector)
     }
 }
 
-TEST(TestTransform, TestScaling)
-{
+TEST(TestTransform, TestScaling) {
     // scaling applied to point
     {
         const auto transform = Transform::Scaling(2.0f, 3.0f, 4.0f);
@@ -98,8 +95,7 @@ TEST(TestTransform, TestScaling)
     }
 }
 
-TEST(TestTransform, TestRotateX)
-{
+TEST(TestTransform, TestRotateX) {
     {
         const auto p = MakePoint(0.0f, 1.0f, 0.0f);
 
@@ -116,8 +112,7 @@ TEST(TestTransform, TestRotateX)
     }
 }
 
-TEST(TestTransform, TestRotateY)
-{
+TEST(TestTransform, TestRotateY) {
     {
         const auto p = MakePoint(0.0f, 0.0f, 1.0f);
 
@@ -131,8 +126,7 @@ TEST(TestTransform, TestRotateY)
     }
 }
 
-TEST(TestTransform, TestRotateZ)
-{
+TEST(TestTransform, TestRotateZ) {
     {
         const auto p = MakePoint(0.0f, 1.0f, 0.0f);
 
@@ -146,8 +140,7 @@ TEST(TestTransform, TestRotateZ)
     }
 }
 
-TEST(TestTransform, TestShearing)
-{
+TEST(TestTransform, TestShearing) {
     const auto p = MakePoint(2.0f, 3.0f, 4.0f);
 
     {
@@ -187,14 +180,13 @@ TEST(TestTransform, TestShearing)
     }
 }
 
-TEST(TestTransform, TestChainedTransforms)
-{
+TEST(TestTransform, TestChainedTransforms) {
     const auto p = MakePoint(1.0f, 0.0f, 1.0f);
 
     auto transformation = Transformation::IdentityTransformation()
-        .rotate(Axes::X, EIGEN_PI / 2.0F)
-        .scale(5.0f, 5.0f, 5.0f)
-        .translate(MakeVector(10.0f, 5.0f, 7.0f));
+                              .rotate(Axes::X, EIGEN_PI / 2.0F)
+                              .scale(5.0f, 5.0f, 5.0f)
+                              .translate(MakeVector(10.0f, 5.0f, 7.0f));
 
     const auto expected = MakePoint(15.0f, 0.0f, 7.0f);
     EXPECT_THAT(transformation.matrix() * p, IsSimilarToVector(expected, kEpsilon));

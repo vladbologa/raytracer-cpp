@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    name: Format (clang-format)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install clang-format
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+
+      - name: Check formatting
+        run: |
+          find RayTracer -type f \( -name "*.cpp" -o -name "*.h" -o -name "*.hpp" \) | xargs clang-format --dry-run --Werror
+
+  lint:
+    name: Lint (clang-tidy)
+    needs: format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install clang-tidy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy
+
+      - name: Configure CMake with clang-tidy
+        run: cmake -S RayTracer -B build_lint -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DENABLE_CLANG_TIDY=ON
+
+      - name: Run clang-tidy via Build
+        run: cmake --build build_lint --parallel
+
+  test:
+    name: Build & Test
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S RayTracer -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure

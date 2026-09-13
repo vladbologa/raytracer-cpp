@@ -6,8 +6,7 @@
 using namespace RayTracer;
 const float kEpsilon = 1e-5f;
 
-TEST(TestRay, TestConstructor)
-{
+TEST(TestRay, TestConstructor) {
     const auto origin = MakePoint(1.0f, 2.0f, 3.0f);
     const auto direction = MakeVector(4.0f, 5.0f, 6.0f);
 
@@ -16,8 +15,7 @@ TEST(TestRay, TestConstructor)
     EXPECT_THAT(ray.direction(), IsSimilarToVector(direction, kEpsilon));
 }
 
-TEST(TestRay, TestPosition)
-{
+TEST(TestRay, TestPosition) {
     {
         const auto ray = Ray(MakePoint(2.0f, 3.0f, 4.0f), MakeVector(1.0f, 0.0f, 0.0f));
         EXPECT_THAT(ray.position(1.0f), IsSimilarToVector(MakePoint(3.0f, 3.0f, 4.0f), kEpsilon));
@@ -29,5 +27,4 @@ TEST(TestRay, TestPosition)
         const auto ray = Ray(MakePoint(2.0f, 3.0f, 4.0f), MakeVector(3.0f, -1.0f, 2.0f));
         EXPECT_THAT(ray.position(2.0f), IsSimilarToVector(MakePoint(8.0f, 1.0f, 8.0f), kEpsilon));
     }
-
 }

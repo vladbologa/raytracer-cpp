@@ -12,8 +12,7 @@ const float kEpsilon = 1e-5f;
 static_assert(std::is_nothrow_move_constructible_v<Canvas>);
 static_assert(std::is_nothrow_move_assignable_v<Canvas>);
 
-TEST(TestCanvas, TestDefaultConstructor)
-{
+TEST(TestCanvas, TestDefaultConstructor) {
     const size_t width = 1920;
     const size_t height = 1080;
     const Canvas canvas(width, height);
@@ -29,20 +28,18 @@ TEST(TestCanvas, TestDefaultConstructor)
     }
 }
 
-TEST(TestCanvas, TestSetter)
-{
+TEST(TestCanvas, TestSetter) {
     const size_t width = 30;
     const size_t height = 40;
     Canvas canvas(width, height);
 
-    const auto& pixelColor = canvas.pixelAt(2, 3);
+    const auto &pixelColor = canvas.pixelAt(2, 3);
     EXPECT_THAT(pixelColor, IsSimilarToVector(Color(0.0f, 0.0f, 0.0f), kEpsilon));
     canvas.pixelAt(2, 3) = Color(0.2f, 0.3f, 0.4f);
     EXPECT_THAT(pixelColor, IsSimilarToVector(Color(0.2f, 0.3f, 0.4f), kEpsilon));
 }
 
-TEST(TestCanvas, TestPpmExport)
-{
+TEST(TestCanvas, TestPpmExport) {
     const size_t width = 5;
     const size_t height = 3;
     Canvas canvas(width, height);
@@ -51,15 +48,13 @@ TEST(TestCanvas, TestPpmExport)
     canvas.pixelAt(2, 1) = Color(0.0f, 0.5f, 0.0f);
     canvas.pixelAt(4, 2) = Color(-0.5f, 0.0f, 1.0f);
 
-    std::vector<std::string> expectedLines{
-        "P3",
-        "5 3",
-        "255",
-        "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
-        "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
-        "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255",
-        ""
-    };
+    std::vector<std::string> expectedLines{"P3",
+                                           "5 3",
+                                           "255",
+                                           "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+                                           "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0",
+                                           "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255",
+                                           ""};
 
     auto stream = canvas.exportToPpm();
     size_t lineCount = 0;
@@ -68,8 +63,7 @@ TEST(TestCanvas, TestPpmExport)
     }
 }
 
-TEST(TestCanvas, TestPpmExportSplitLongLines)
-{
+TEST(TestCanvas, TestPpmExportSplitLongLines) {
     const size_t width = 9;
     const size_t height = 2;
     Canvas canvas(width, height);
@@ -88,8 +82,7 @@ TEST(TestCanvas, TestPpmExportSplitLongLines)
         "255 204 153 255 204 153 255 204 153 255 204 153",
         "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153",
         "255 204 153 255 204 153 255 204 153 255 204 153",
-        ""
-    };
+        ""};
 
     auto stream = canvas.exportToPpm();
     size_t lineCount = 0;
@@ -99,8 +92,7 @@ TEST(TestCanvas, TestPpmExportSplitLongLines)
 }
 
 #ifndef NDEBUG
-TEST(TestCanvasDeathTest, TestOutOfBounds)
-{
+TEST(TestCanvasDeathTest, TestOutOfBounds) {
     const size_t width = 30;
     const size_t height = 40;
     {
