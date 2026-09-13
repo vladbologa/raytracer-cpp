@@ -18,6 +18,12 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(AddEigen)
 include(AddGoogleTest)
 
+if(MSVC)
+	add_compile_options(/W4 /WX)
+else()
+	add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+endif()
+
 option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis during build" OFF)
 
 if(ENABLE_CLANG_TIDY)
