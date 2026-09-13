@@ -14,11 +14,11 @@ class Canvas
 {
 public:
     Canvas(size_t width, size_t height)
-        : m_width(width), m_height(height), m_canvas(m_width* m_height)
+        : width_(width), height_(height), canvas_(width_ * height_)
     {}
 
-    Canvas(Canvas& other) = default;
-    Canvas& operator=(Canvas& other) = default;
+    Canvas(const Canvas& other) = delete;
+    Canvas& operator=(const Canvas& other) = delete;
 
     Canvas(Canvas&& other) noexcept = default;
     Canvas& operator=(Canvas&& other) noexcept = default;
@@ -30,26 +30,33 @@ public:
 
     const Color& pixelAt(size_t x, size_t y) const noexcept
     {
-        assert(x < m_width); assert(y < m_height);
-        return m_canvas[x + y * m_width];
+        assert(x < width_); assert(y < height_);
+        return canvas_[x + y * width_];
     }
 
     size_t width() const noexcept
     {
-        return m_width;
+        return width_;
     }
 
     size_t height() const noexcept
     {
-        return m_height;
+        return height_;
+    }
+
+    Canvas clone() const
+    {
+        Canvas copy(width_, height_);
+        copy.canvas_ = canvas_;
+        return copy;
     }
 
     std::stringstream exportToPpm() const;
 
 private:
-    size_t m_width;
-    size_t m_height;
-    std::vector<Color> m_canvas;
+    size_t width_;
+    size_t height_;
+    std::vector<Color> canvas_;
 };
 
 void WriteCanvasToFile(const Canvas& canvas, const std::string& fileName);
