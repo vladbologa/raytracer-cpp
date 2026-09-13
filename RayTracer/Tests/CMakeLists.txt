@@ -25,4 +25,4 @@ gtest_discover_tests(TestRayTracerCpp
                 TEST_PREFIX "TestRayTracerCpp."
                 PROPERTIES FOLDER "Tests")
 
-target_compile_features(TestRayTracerCpp PUBLIC cxx_std_17)
+target_compile_features(TestRayTracerCpp PUBLIC cxx_std_20)

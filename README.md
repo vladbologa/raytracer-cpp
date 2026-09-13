@@ -5,21 +5,23 @@ Building a ray tracer in C++, following "The Ray Tracer Challenge" by Jamis Buck
 ## Dependencies
 
 - CMake 3.20+
-- A C++17 compiler (GCC, Clang, or MSVC)
+- A C++20 compiler (GCC, Clang, or MSVC)
 - Eigen 5.0 and GoogleTest 1.17 are fetched automatically at configure time
 
-## Build
+Run these commands from the repository root.
+
+## Build with GCC or Clang
 
 ```bash
-cmake -S RayTracer -B RayTracer/build -DCMAKE_BUILD_TYPE=Debug
-cmake --build RayTracer/build
-ctest --test-dir RayTracer/build --output-on-failure
+cmake -S RayTracer -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
 ```
 
-On Windows with MinGW (no Visual Studio required):
+## Build with Visual Studio
 
 ```powershell
-cmake -S RayTracer -B RayTracer/build -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug
-cmake --build RayTracer/build
-ctest --test-dir RayTracer/build --output-on-failure
+cmake -S RayTracer -B build-msvc -G "Visual Studio 17 2022" -A x64
+cmake --build build-msvc --config Debug --parallel
+ctest --test-dir build-msvc -C Debug --output-on-failure
 ```
