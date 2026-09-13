@@ -122,7 +122,7 @@ TEST(TestMath, TestInverse) {
             0.0f, 0.0f, 0.0f;
 
         Matrix4f result;
-        bool invertible;
+        bool invertible = false;
         mat.computeInverseWithCheck(result, invertible, kEpsilon);
         EXPECT_FALSE(invertible);
     }
@@ -133,8 +133,8 @@ TEST(TestMath, TestInverse) {
             7.0f, -6.0f;
 
         Matrix4f result;
-        bool invertible;
-        float determinant;
+        bool invertible = false;
+        float determinant = 0.0f;
         mat.computeInverseAndDetWithCheck(result, determinant, invertible, kEpsilon);
         EXPECT_NEAR(determinant, -2120.0f, kEpsilon);
         EXPECT_TRUE(invertible);

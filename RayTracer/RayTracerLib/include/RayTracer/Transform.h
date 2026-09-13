@@ -4,9 +4,11 @@
 
 #include <Eigen/Core>
 
+#include <cstdint>
+
 namespace RayTracer {
 
-enum class Axes { X, Y, Z };
+enum class Axes : std::uint8_t { X, Y, Z };
 
 // Stores a transformation matrix
 //
@@ -20,10 +22,10 @@ enum class Axes { X, Y, Z };
 class Transformation {
   public:
     // get an identity transformation
-    static Transformation IdentityTransformation();
+    [[nodiscard]] static Transformation IdentityTransformation();
 
     // get the transformation matrix
-    const Matrix4f &matrix() const;
+    [[nodiscard]] const Matrix4f &matrix() const noexcept;
 
     // apply translation to the existing transformation
     Transformation &translate(float x, float y, float z);

@@ -5,6 +5,7 @@
 #include <cassert>
 #include <sstream>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace RayTracer {
@@ -15,33 +16,38 @@ class Canvas {
     Canvas(size_t width, size_t height)
         : width_(width), height_(height), canvas_(width_ * height_) {}
 
+    // Disallow expensive implicit copies (use clone() instead)
     Canvas(const Canvas &other) = delete;
     Canvas &operator=(const Canvas &other) = delete;
 
     Canvas(Canvas &&other) noexcept = default;
     Canvas &operator=(Canvas &&other) noexcept = default;
 
-    Color &pixelAt(size_t x, size_t y) noexcept {
-        return const_cast<Color &>(const_cast<const Canvas *>(this)->pixelAt(x, y));
-    }
+    ~Canvas() = default;
 
-    const Color &pixelAt(size_t x, size_t y) const noexcept {
+    Color &pixelAt(size_t x, size_t y) noexcept {
         assert(x < width_);
         assert(y < height_);
-        return canvas_[x + y * width_];
+        return canvas_[x + (y * width_)];
     }
 
-    size_t width() const noexcept { return width_; }
+    [[nodiscard]] const Color &pixelAt(size_t x, size_t y) const noexcept {
+        assert(x < width_);
+        assert(y < height_);
+        return canvas_[x + (y * width_)];
+    }
 
-    size_t height() const noexcept { return height_; }
+    [[nodiscard]] size_t width() const noexcept { return width_; }
 
-    Canvas clone() const {
+    [[nodiscard]] size_t height() const noexcept { return height_; }
+
+    [[nodiscard]] Canvas clone() const {
         Canvas copy(width_, height_);
         copy.canvas_ = canvas_;
         return copy;
     }
 
-    std::stringstream exportToPpm() const;
+    [[nodiscard]] std::stringstream exportToPpm() const;
 
   private:
     size_t width_;

@@ -25,7 +25,7 @@ Transformation Transformation::IdentityTransformation() {
     return Transformation{};
 }
 
-const Matrix4f &Transformation::matrix() const {
+const Matrix4f &Transformation::matrix() const noexcept {
     return matrix_;
 }
 

@@ -103,8 +103,8 @@ TEST(TestCanvasDeathTest, TestOutOfBounds) {
 
     {
         const Canvas canvas(width, height);
-        EXPECT_DEATH(canvas.pixelAt(width, 0), "Assertion");
-        EXPECT_DEATH(canvas.pixelAt(0, height), "Assertion");
+        EXPECT_DEATH((void)canvas.pixelAt(width, 0), "Assertion");
+        EXPECT_DEATH((void)canvas.pixelAt(0, height), "Assertion");
     }
 }
 #endif // NDEBUG

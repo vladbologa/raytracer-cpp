@@ -10,14 +10,14 @@ const size_t kPixelsPerLine = 5;
 
 std::stringstream Canvas::exportToPpm() const {
     std::stringstream ppmStream;
-    ppmStream << "P3" << std::endl
-              << std::to_string(width_) << " " << std::to_string(height_) << std::endl
-              << std::to_string(kMaxColorValue) << std::endl;
+    ppmStream << "P3\n"
+              << std::to_string(width_) << " " << std::to_string(height_) << "\n"
+              << std::to_string(kMaxColorValue) << "\n";
 
     size_t pixelIdx = 0;
     size_t pixelsOnCurrentLine = 0;
     for (const auto &pixel : canvas_) {
-        for (size_t i = 0; i < 3; i++) {
+        for (Eigen::Index i = 0; i < 3; ++i) {
             size_t colorValue =
                 static_cast<size_t>(std::round(kMaxColorValue * std::clamp(pixel[i], 0.0f, 1.0f)));
             ppmStream << std::to_string(colorValue);
@@ -29,14 +29,14 @@ std::stringstream Canvas::exportToPpm() const {
         ++pixelIdx;
         ++pixelsOnCurrentLine;
         if ((pixelIdx % width_ == 0) || (pixelsOnCurrentLine % kPixelsPerLine == 0)) {
-            ppmStream << std::endl;
+            ppmStream << "\n";
             pixelsOnCurrentLine = 0;
         } else {
             ppmStream << " ";
         }
     }
 
-    ppmStream << std::endl;
+    ppmStream << "\n";
     return ppmStream;
 }
 
