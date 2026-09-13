@@ -44,7 +44,6 @@ class Transformation {
 
   private:
     Matrix4f matrix_ = Matrix4f::Identity();
-    ;
 };
 
 namespace Transform {
