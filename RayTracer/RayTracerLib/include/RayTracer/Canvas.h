@@ -21,27 +21,29 @@ class Canvas {
     Canvas(Canvas &&other) noexcept = default;
     Canvas &operator=(Canvas &&other) noexcept = default;
 
+    ~Canvas() = default;
+
     Color &pixelAt(size_t x, size_t y) noexcept {
-        return const_cast<Color &>(const_cast<const Canvas *>(this)->pixelAt(x, y));
+        return const_cast<Color &>(std::as_const(*this).pixelAt(x, y));
     }
 
-    const Color &pixelAt(size_t x, size_t y) const noexcept {
+    [[nodiscard]] const Color &pixelAt(size_t x, size_t y) const noexcept {
         assert(x < width_);
         assert(y < height_);
         return canvas_[x + y * width_];
     }
 
-    size_t width() const noexcept { return width_; }
+    [[nodiscard]] size_t width() const noexcept { return width_; }
 
-    size_t height() const noexcept { return height_; }
+    [[nodiscard]] size_t height() const noexcept { return height_; }
 
-    Canvas clone() const {
+    [[nodiscard]] Canvas clone() const {
         Canvas copy(width_, height_);
         copy.canvas_ = canvas_;
         return copy;
     }
 
-    std::stringstream exportToPpm() const;
+    [[nodiscard]] std::stringstream exportToPpm() const;
 
   private:
     size_t width_;

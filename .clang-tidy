@@ -7,6 +7,8 @@ Checks: >
   performance-*,
   readability-*,
   -bugprone-easily-swappable-parameters,
+  -bugprone-exception-escape,
+  -cppcoreguidelines-avoid-c-arrays,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-owning-memory,
   -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
@@ -19,7 +21,7 @@ Checks: >
 
 WarningsAsErrors: ''
 
-HeaderFilterRegex: '(RayTracerLib|apps|Tests)/.*'
+HeaderFilterRegex: 'RayTracer/.*'
 
 FormatStyle: 'file'
 
