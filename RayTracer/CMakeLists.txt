@@ -14,21 +14,21 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	include(CTest)
 endif()
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(AddEigen)
+include(AddGoogleTest)
+
 option(ENABLE_CLANG_TIDY "Enable clang-tidy static analysis during build" OFF)
 
 if(ENABLE_CLANG_TIDY)
 	find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
 	if(CLANG_TIDY_EXE)
 		set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
-		message(STATUS "clang-tidy enabled: ${CLANG_TIDY_EXE}")
+		message(STATUS "clang-tidy enabled for project targets: ${CLANG_TIDY_EXE}")
 	else()
 		message(WARNING "ENABLE_CLANG_TIDY is ON, but clang-tidy executable was not found.")
 	endif()
 endif()
-
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(AddEigen)
-include(AddGoogleTest)
 
 add_subdirectory(RayTracerLib)
 add_subdirectory(apps)
