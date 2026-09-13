@@ -31,7 +31,6 @@ jobs:
 
   lint:
     name: Lint (clang-tidy)
-    needs: format
     runs-on: ubuntu-latest
 
     steps:
@@ -51,7 +50,6 @@ jobs:
 
   test:
     name: Build & Test
-    needs: lint
     runs-on: ubuntu-latest
 
     steps:
