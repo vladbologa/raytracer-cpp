@@ -8,19 +8,18 @@ namespace RayTracer {
 const size_t kMaxColorValue = 255;
 const size_t kPixelsPerLine = 5;
 
-std::stringstream Canvas::exportToPpm() const
-{
+std::stringstream Canvas::exportToPpm() const {
     std::stringstream ppmStream;
-    ppmStream 
-        << "P3" << std::endl
-        << std::to_string(width_) << " " << std::to_string(height_) << std::endl 
-        << std::to_string(kMaxColorValue) << std::endl;
+    ppmStream << "P3" << std::endl
+              << std::to_string(width_) << " " << std::to_string(height_) << std::endl
+              << std::to_string(kMaxColorValue) << std::endl;
 
     size_t pixelIdx = 0;
     size_t pixelsOnCurrentLine = 0;
-    for (const auto& pixel : canvas_) {
+    for (const auto &pixel : canvas_) {
         for (size_t i = 0; i < 3; i++) {
-            size_t colorValue = static_cast<size_t>(std::round(kMaxColorValue * std::clamp(pixel[i], 0.0f, 1.0f)));
+            size_t colorValue =
+                static_cast<size_t>(std::round(kMaxColorValue * std::clamp(pixel[i], 0.0f, 1.0f)));
             ppmStream << std::to_string(colorValue);
             if (i < 2) {
                 ppmStream << " ";
@@ -32,8 +31,7 @@ std::stringstream Canvas::exportToPpm() const
         if ((pixelIdx % width_ == 0) || (pixelsOnCurrentLine % kPixelsPerLine == 0)) {
             ppmStream << std::endl;
             pixelsOnCurrentLine = 0;
-        }
-        else {
+        } else {
             ppmStream << " ";
         }
     }
@@ -42,11 +40,10 @@ std::stringstream Canvas::exportToPpm() const
     return ppmStream;
 }
 
-void WriteCanvasToFile(const Canvas& canvas, const std::string& fileName)
-{
+void WriteCanvasToFile(const Canvas &canvas, const std::string &fileName) {
     auto ppmStream = canvas.exportToPpm();
     std::ofstream fout(fileName);
     fout << ppmStream.rdbuf();
 }
 
-}
+} // namespace RayTracer

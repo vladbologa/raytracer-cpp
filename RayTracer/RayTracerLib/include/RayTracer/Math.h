@@ -26,4 +26,4 @@ inline Vector4f MakePoint(float x, float y, float z) {
     return Vector4f(x, y, z, 1.0f);
 }
 
-}
+} // namespace RayTracer
